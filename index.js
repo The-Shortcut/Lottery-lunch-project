@@ -8,10 +8,10 @@ const client = new Client({
 });
 
 var app = express();
-
+app.use(express.static('build'))
 const query=`SELECT email FROM lottery_lunch_lotterylunchparticipants ORDER BY random() limit 2`
 app.set('port', process.env.PORT || 4000);
-app.get('/', async function(request, response, next) {
+app.get('/api/generateEmails', async function(request, response, next) {
     try {
         const connectionResult = await client.connect();
         const res = await client.query(query);
