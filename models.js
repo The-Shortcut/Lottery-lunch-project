@@ -103,19 +103,17 @@ const searchByEmail = async (username) => {
 
 const deleteByEmail = async (body) => {
   const { email } = body;
-  console.log('email ', email);
-  //DELETE FROM lottery_lunch_users WHERE email='${email}';
+  console.log("email ", email);
+
   const query1 = `DELETE FROM lottery_lunch_user_interests WHERE email='${email}';DELETE FROM lottery_lunch_users WHERE email='${email}';`;
-  const query2 =``;
+
   try {
     const client = await pool.connect();
 
-    //console.log("connection is ", client);
-     await client.query(query1);
-     //await client.query(query2);
-    client.release(true);
+    const res = await client.query(query1);
 
-    
+    client.release(true);
+    return res;
   } catch (er) {
     console.log(er);
   }
