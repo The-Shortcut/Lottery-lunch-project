@@ -32,28 +32,6 @@ app.set("port", process.env.PORT || 4000);
 
 
 
-app.get("/api/getLotteryMonthlyPair", async (req, resp) => {
-  try {
-    const res = await models.getLotteryMonthlyPair();
-    console.log("REs is ", res);
-    resp.status(200).send(res);
-  } catch (err) {
-    console.log(err.stack);
-    res.status(400).send(err);
-  }
-});
-
-app.post("/api/insertIntoMonthlyPair", async (request, response, next) => {
-  console.log("body is ", request.body);
-  try {
-    const res = await models.insertIntoMonthlyPair(request.body);
-    response.status(200).send(res);
-  } catch (err) {
-    console.log(err.stack);
-    response.status(400).send(err);
-  }
-});
-
 
 app.listen(4000, function () {
   console.log("Server is running.. on Port 4000");

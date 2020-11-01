@@ -49,9 +49,9 @@ const addInterests = async (body) => {
   }
 };
 
-const getLotteryMonthlyPair = async () => {
+const getHistoryUsers = async () => {
   console.log("within func");
-  const query = "SELECT * FROM lottery_lunch_monthlypair";
+  const query = "SELECT * FROM lottery_lunch_history_user_pairs;";
   try {
     const client = await pool.connect();
     const res = await client.query(query);
@@ -63,9 +63,9 @@ const getLotteryMonthlyPair = async () => {
   }
 };
 
-const insertIntoMonthlyPair = async (body) => {
-  const { month_id, person1_id, person2_id } = body;
-  const query = `Insert into lottery_lunch_monthlypair(of_month_id, person1_id, person2_id) values('${month_id}','${person1_id}','${person2_id}')`;
+const insertIntoHistory = async (body) => {
+  
+  const query = `INSERT INTO lottery_lunch_history_user_pairs(email1, email2) values('${body[0]}','${body[1]}')`;
   const client = await pool.connect();
 
   // console.log("connection is ", client);
@@ -123,8 +123,8 @@ module.exports = {
   getInterests,
   addInterests,
   addLotteryParticipant,
-  getLotteryMonthlyPair,
-  insertIntoMonthlyPair,
+  getHistoryUsers,
+  insertIntoHistory,
   searchByEmail,
   deleteByEmail,
 };

@@ -47,4 +47,30 @@ userRouter.delete("/:email", async (request, response, next) => {
   }
 });
 
+userRouter.get("/getHistoryUsers", async (req, resp) => {
+  try {
+    const res = await models.getHistoryUsers();
+    console.log("REs is ", res);
+    resp.status(200).send(res);
+  } catch (err) {
+    console.log(err.stack);
+    res.status(400).send(err);
+  }
+});
+
+userRouter.post("/insertIntoHistory", async (request, response, next) => {
+  console.log("body is ", request.body);
+  try {
+    let res;
+    request.body.forEach(async (emailList) => {
+       res = await models.insertIntoHistory(emailList);
+    });
+
+    response.status(200).send(res);
+  } catch (err) {
+    console.log(err.stack);
+    response.status(400).send(err);
+  }
+});
+
 module.exports = userRouter;
