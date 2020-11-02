@@ -89,8 +89,8 @@ const addLotteryParticipant = async (body) => {
   return res;
 };
 
-const searchByEmail = async (username) => {
-  const query = `SELECT *  FROM lottery_lunch_lotterylunchparticipants where first_name='${username}' `;
+const searchByEmail = async (email) => {
+  const query = `SELECT *  FROM lottery_lunch_users where email='${email}' `;
   const client = await pool.connect();
 
   // console.log("connection is ", client);

@@ -18,19 +18,19 @@ userRouter.post("/", async function (request, response, next) {
 });
 
 userRouter.get("/:email", async (request, response, next) => {
-  console.log("name ", request.params.searchterm);
-  const username = request.params.name.slice(1);
-  console.log("username ", username);
-  try {
-    console.log("req data ", request.params);
-    const res = await models.searchByEmail(username);
-    response.status(200).send(res);
+  console.log("data is ", request.params);
+  // const username = request.params.name.slice(1);
+  // console.log("username ", username);
+  // try {
+  //   console.log("req data ", request.params);
+  //   const res = await models.searchByEmail(username);
+  //   response.status(200).send(res);
 
-    console.log("res from return ", res);
-  } catch (err) {
-    console.log(err.stack);
-    response.status(400).send(err);
-  }
+  //   console.log("res from return ", res);
+  // } catch (err) {
+  //   console.log(err.stack);
+  //   response.status(400).send(err);
+  // }
 });
 
 userRouter.delete("/:email", async (request, response, next) => {

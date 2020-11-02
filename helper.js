@@ -1,9 +1,22 @@
+const { check } = require("prettier");
 const models = require("./models");
 
-const generatePairs = (users, finalPairs, remainingUsers, duplicateList) => {
+const generatePairs = (
+  users,
+  finalPairs,
+  remainingUsers,
+  duplicateList,
+  HistoryArray
+) => {
   console.log("data is ", users);
   const shuffledArr = getShuffledArr(users);
-  createPairsOfTwo(shuffledArr, finalPairs, remainingUsers, duplicateList);
+  createPairsOfTwo(
+    shuffledArr,
+    finalPairs,
+    remainingUsers,
+    duplicateList,
+    HistoryArray
+  );
   console.log("duplicates are ", duplicateList);
 };
 const getShuffledArr = (arr) => {
@@ -15,35 +28,68 @@ const getShuffledArr = (arr) => {
   return newArr;
 };
 
-const createPairsOfTwo = (data, finalPairs, remainingUsers, duplicateList) => {
-  
-   const filteredUsers = data.filter(user => {
-     console.log('the current user is ', user.email);
-     console.log('The duplicate list is ', duplicateList);
-     console.log('is the user found in duplicate list ', duplicateList.includes(user.email));
-    return !duplicateList.includes(user.email)
-   })
-  console.log('filtered useres ', filteredUsers);
-
+const createPairsOfTwo = (
+  data,
+  finalPairs,
+  remainingUsers,
+  duplicateList,
+  HistoryArray
+) => {
+  const filteredUsers = data.filter((user) => {
+    // console.log("the current user is ", user.email);
+    // console.log("The duplicate list is ", duplicateList);
+    // console.log(
+    //   "is the user found in duplicate list ",
+    //   duplicateList.includes(user.email)
+    // );
+    return !duplicateList.includes(user.email);
+  });
+  console.log("filtered useres ", filteredUsers);
 
   if (filteredUsers && Object.keys(filteredUsers).length > 0) {
     if (filteredUsers.length % 2 === 0) {
       console.log("is even");
       for (let i = 0; i < filteredUsers.length; i = i + 2) {
+       
+        for (let user = 0; user < HistoryArray.length; user++) {
+          if (
+            (HistoryArray[user].email1 === filteredUsers[i].email &&
+            HistoryArray[user].email2 === filteredUsers[i+1].email) ||
+            (HistoryArray[user].email2 === filteredUsers[i].email &&
+            HistoryArray[user].email1 === filteredUsers[i+1].email)
+          ) {
+            console.log('found in history table');
+            remainingUsers.push([filteredUsers[i].email, filteredUsers[i + 1].email])
+            return
+          }
+        }
+
         finalPairs.push([filteredUsers[i].email, filteredUsers[i + 1].email]);
         duplicateList.push(filteredUsers[i].email);
-        duplicateList.push(filteredUsers[i+1].email);
-        
+        duplicateList.push(filteredUsers[i + 1].email);
       }
       console.log(finalPairs);
     } else {
       console.log("is odd");
       remainingUsers.push(filteredUsers[filteredUsers.length - 1].email);
       for (let i = 0; i < filteredUsers.length - 1; i = i + 2) {
+        
+        for (let user = 0; user < HistoryArray.length; user++) {
+          if (
+            (HistoryArray[user].email1 === filteredUsers[i].email &&
+              HistoryArray[user].email2 === filteredUsers[i+1].email) ||
+              (HistoryArray[user].email2 === filteredUsers[i].email &&
+              HistoryArray[user].email1 === filteredUsers[i+1].email)
+          ) {
+            console.log('found in history table');
+            remainingUsers.push([filteredUsers[i].email, filteredUsers[i + 1].email])
+            return
+          }
+        }
+
         finalPairs.push([filteredUsers[i].email, filteredUsers[i + 1].email]);
         duplicateList.push(filteredUsers[i].email);
-        duplicateList.push(filteredUsers[i+1].email);
-        
+        duplicateList.push(filteredUsers[i + 1].email);
       }
     }
   }
