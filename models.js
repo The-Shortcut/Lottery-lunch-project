@@ -7,20 +7,7 @@ const pool = new pg.Pool({
   connectionString: connectionString,
 });
 
-const getLotteryParticipants = async (interest) => {
-  const query = `SELECT email FROM lottery_lunch_user_interests where interests='${interest}';`;
 
-  try {
-    const client = await pool.connect();
-    const res = await client.query(query);
-    console.log("res ", res.rows);
-    client.release(true);
-
-    return res.rows;
-  } catch (er) {
-    console.log(er);
-  }
-};
 const getInterests = async () => {
   const query = "select * from lottery_lunch_interests;";
   try {
@@ -118,6 +105,37 @@ const deleteByEmail = async (body) => {
     console.log(er);
   }
 };
+const getLotteryParticipants = async (interest) => {
+  const query = `SELECT email FROM lottery_lunch_user_interests where interests='${interest}';`;
+
+  try {
+    const client = await pool.connect();
+    const res = await client.query(query);
+    console.log("res ", res.rows);
+    client.release(true);
+
+    return res.rows;
+  } catch (er) {
+    console.log(er);
+  }
+};
+
+const insertIntoUsersInterest = async(email, interest) => {
+ 
+  const query = `INSERT INTO lottery_lunch_user_interests(email, interests)VALUES ('${email}','${interest}');`;
+ 
+  try {
+    const client = await pool.connect();
+    const res = await client.query(query);
+    console.log("res ", res.rows);
+    client.release(true);
+
+    return res.rows;
+  } catch (er) {
+    console.log(er);
+  }
+}
+
 module.exports = {
   getLotteryParticipants,
   getInterests,
@@ -127,4 +145,5 @@ module.exports = {
   insertIntoHistory,
   searchByEmail,
   deleteByEmail,
+  insertIntoUsersInterest
 };

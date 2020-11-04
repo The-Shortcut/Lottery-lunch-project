@@ -19,8 +19,8 @@ userRouter.post("/", async function (request, response, next) {
 
 userRouter.get("/:email", async (request, response, next) => {
   console.log("data is ", request.params);
-  // const username = request.params.name.slice(1);
-  // console.log("username ", username);
+  const userEmail = request.params.email.slice(1);
+  console.log("userEmail ", userEmail);
   // try {
   //   console.log("req data ", request.params);
   //   const res = await models.searchByEmail(username);
@@ -63,7 +63,23 @@ userRouter.post("/insertIntoHistory", async (request, response, next) => {
   try {
     let res;
     request.body.forEach(async (emailList) => {
-       res = await models.insertIntoHistory(emailList);
+      res = await models.insertIntoHistory(emailList);
+    });
+
+    response.status(200).send(res);
+  } catch (err) {
+    console.log(err.stack);
+    response.status(400).send(err);
+  }
+});
+
+userRouter.post("/users_interests", async (request, response, next) => {
+  console.log("body is ", request.body);
+  const {email, interests} = request.body;
+  try {
+    let res;
+    interests.forEach(async (interest) => {
+      res = await models.insertIntoUsersInterest(email, interest);
     });
 
     response.status(200).send(res);
