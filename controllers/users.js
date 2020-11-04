@@ -21,16 +21,16 @@ userRouter.get("/:email", async (request, response, next) => {
   console.log("data is ", request.params);
   const userEmail = request.params.email.slice(1);
   console.log("userEmail ", userEmail);
-  // try {
-  //   console.log("req data ", request.params);
-  //   const res = await models.searchByEmail(username);
-  //   response.status(200).send(res);
+  try {
+    console.log("req data ", request.params);
+    const res = await models.searchByEmail(userEmail);
+    response.status(200).send(res);
 
-  //   console.log("res from return ", res);
-  // } catch (err) {
-  //   console.log(err.stack);
-  //   response.status(400).send(err);
-  // }
+    console.log("res from return ", res);
+  } catch (err) {
+    console.log(err.stack);
+    response.status(400).send(err);
+  }
 });
 
 userRouter.delete("/:email", async (request, response, next) => {
