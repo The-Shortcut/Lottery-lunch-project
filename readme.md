@@ -1,10 +1,6 @@
 This project contains all backend operations (admin front-end lottery lunch & signup form) with endpoints
 
-This project can be hosted as a full-stack application by placing build file from admin front-end lottery lunch ( whose github repo is https://github.com/The-Shortcut/admin-front-end-lottery-lunch ) and changing base url to
-
-```
-/api
-```
+This project can be hosted as a full-stack application by placing build file from admin front-end lottery lunch ( whose github repo is https://github.com/The-Shortcut/admin-front-end-lottery-lunch ) and changing base url.
 
 
 **env file to be added from the documentation file.**
