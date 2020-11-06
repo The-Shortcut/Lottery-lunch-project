@@ -2,7 +2,7 @@ This project contains all backend operations (admin front-end lottery lunch & si
 
 This project can be hosted as a full-stack application by placing build file from admin front-end lottery lunch ( whose github repo is https://github.com/The-Shortcut/admin-front-end-lottery-lunch ) and changing base url.
 
-Hosted on Heroku: https://ts-lottery-lunch.herokuapp.com/
+Hosted on Heroku:https://lottery-lunch-2020.herokuapp.com/
 
 **env file to be added from the documentation file.**
 
@@ -16,21 +16,23 @@ Hosted on Heroku: https://ts-lottery-lunch.herokuapp.com/
 
 ## Project Requirements
 
-* Users sign-up to service and stored their data. They might want to read their data and modify their
-data. The website admin should be able to delete a user.
-* Users have interests. One user may have many interests. They store their interests while singing up.
-* An admin will generate a pair of users based on interests. Pairs should be generated including all
-people. Same pairs shouldn't be generated again.
+- Users sign-up to service and stored their data. They might want to read their data and modify their
+  data. The website admin should be able to delete a user.
+- Users have interests. One user may have many interests. They store their interests while singing up.
+- An admin will generate a pair of users based on interests. Pairs should be generated including all
+  people. Same pairs shouldn't be generated again.
 
 ## Access Patterns
-* User is created with interest as marketing & design. UserTwo is created with interest in marketing.
-* Generate a pairs of users.
-  * For a given interest, give me all the users.
-     - This will give me a list of users.
-  * This can be done for all the interest.
-* This works even if user deletes or updates the interest.
+
+- User is created with interest as marketing & design. UserTwo is created with interest in marketing.
+- Generate a pairs of users.
+  - For a given interest, give me all the users.
+    - This will give me a list of users.
+  - This can be done for all the interest.
+- This works even if user deletes or updates the interest.
 
 ## API Design
+
 ```
 # Users
 POST /users
@@ -43,41 +45,42 @@ GET /interests
 DELETE /interests/interestId
 # Generate Pairs
 POST /lunch-pairs - this should return a lottery lunch pair ID
-GET /lunch-pairs/pairId - get the details of the pairs 
+GET /lunch-pairs/pairId - get the details of the pairs
 ```
 
 ## Database Design
+
 ### Users
 
-| email (p.k) | first_name | last_name | joined_at |
-| --- | -----|------ |------ |
-| userOne@test.fi | UserOne | Test | date|
-| userTwo@test.fi | UserTwo | Test | date|
+| email (p.k)     | first_name | last_name | joined_at |
+| --------------- | ---------- | --------- | --------- |
+| userOne@test.fi | UserOne    | Test      | date      |
+| userTwo@test.fi | UserTwo    | Test      | date      |
 
 ### Interests
 
-| email (p.k) | 
-| --- | 
-| marketing |
-| design |
+| email (p.k) |
+| ----------- |
+| marketing   |
+| design      |
 | development |
 
 ### User-Interests
-| email (f.k) | interests (index) |
-| --- | ----- |
-| userOne@test.fi | design |
-| userTwo@test.fi | marketing |
 
+| email (f.k)     | interests (index) |
+| --------------- | ----------------- |
+| userOne@test.fi | design            |
+| userTwo@test.fi | marketing         |
 
 ### History-UserPairs
 
-| email1 | email2 |
-| --- | -----|
+| email1          | email2          |
+| --------------- | --------------- |
 | userOne@test.fi | userTwo@test.fi |
 
-
 ## SQL STATEMENTS
-``` 
+
+```
 CREATE TABLE lottery_lunch_users(
 email VARCHAR(40) PRIMARY KEY,
 first_name VARCHAR(20) NOT NULL,
