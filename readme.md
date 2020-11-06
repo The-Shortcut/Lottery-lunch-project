@@ -2,6 +2,7 @@ This project contains all backend operations (admin front-end lottery lunch & si
 
 This project can be hosted as a full-stack application by placing build file from admin front-end lottery lunch ( whose github repo is https://github.com/The-Shortcut/admin-front-end-lottery-lunch ) and changing base url.
 
+Hosted on Heroku: https://ts-lottery-lunch.herokuapp.com/
 
 **env file to be added from the documentation file.**
 
