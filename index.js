@@ -11,7 +11,7 @@ const interestsRouter = require('./controllers/interests');
 // const client = new Client({
 //     connectionString: connectionString
 // });
-
+const PORT = process.env.PORT || 4000;
 var app = express();
 app.use(cors());
 app.use(express.static("build"));
@@ -21,7 +21,7 @@ app.use('/api/users', userRouter);
 app.use('/api/lunch-pairs', generatePairRouter);
 app.use('/api/interests', interestsRouter);
 //const query=`SELECT email FROM lottery_lunch_lotterylunchparticipants ORDER BY random() limit 2`
-app.set("port", process.env.PORT || 4000);
+app.set("port", `${PORT}`);
 
 
  app.use(function(req, res, next) {
@@ -33,8 +33,8 @@ app.set("port", process.env.PORT || 4000);
 
 
 
-app.listen(4000, function () {
-  console.log("Server is running.. on Port 4000");
+app.listen(`${PORT}`, function () {
+  console.log(`Server is running.. on Port ${PORT}`);
 });
 
 // (err, data) => {
