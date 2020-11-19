@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.static("build"));
 app.use(express.urlencoded());
 app.use(express.json());
-app.use('/hello', (req, res)=>{res.send('hello')} );
+
 app.use('/api/users', userRouter);
 app.use('/api/lunch-pairs', generatePairRouter);
 app.use('/api/interests', interestsRouter);
