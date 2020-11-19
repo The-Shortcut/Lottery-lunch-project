@@ -14,7 +14,7 @@ const interestsRouter = require('./controllers/interests');
 const PORT = process.env.PORT || 4000;
 var app = express();
 app.use(cors());
-//app.use(express.static("build"));
+app.use(express.static("build"));
 app.use(express.urlencoded());
 app.use(express.json());
 app.use('/hello', (req, res)=>{res.send('hello')} );
