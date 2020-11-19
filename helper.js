@@ -1,4 +1,3 @@
-const { check } = require("prettier");
 const models = require("./models");
 
 const generatePairs = (
